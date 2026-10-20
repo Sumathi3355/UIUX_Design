@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartWash | SmartWash Laundry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <button class="brand" onclick="showScreen('welcome')" aria-label="SmartWash home">
+        <img class="brand-logo" src="smartwash-logo.png" alt="SmartWash logo"><span>SmartWash</span>
+      </button>
+      <span class="topbar-note">SMART LAUNDRY</span>
+    </header>
+
+    <!-- 1. Welcome screen -->
+    <section class="screen active" id="welcome">
+      <div class="welcome-layout">
+        <div class="welcome-copy">
+          <span class="eyebrow"><span class="dot"></span> CAMPUS & RESIDENTIAL READY</span>
+          <h1>Smart Laundry.<br><span>Effortlessly Done.</span></h1>
+          <p class="muted">Check washer availability in your hall, reserve cycles instantly, and receive real-time alerts.</p>
+          <div class="feature-list">
+            <article class="feature"><span class="feature-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></span><div><b>Live Machine Status</b><small>Real-time washer & dryer availability</small></div><span class="tag">Telemetry</span></article>
+            <article class="feature"><span class="feature-icon purple"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3v3H8z"/></svg></span><div><b>Reserve in Advance</b><small>No lines or waiting in laundry bays</small></div><span class="tag">Zero Wait</span></article>
+            <article class="feature"><span class="feature-icon mint"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span><div><b>Cycle Completion Alerts</b><small>Timely ping right when your cycle ends</small></div><span class="tag">Instant</span></article>
+          </div>
+          <button class="btn primary full" onclick="showScreen('register')">Get Started <span>→</span></button>
+          <p class="switch-line">Already have an account? <button class="text-btn" onclick="showScreen('signin')">Sign In</button></p>
+          <p class="secure-note">✦ ENCRYPTED CAMPUS & LINEN NETWORK<br><small>By continuing, you agree to our Terms of Service and acknowledge our privacy policy.</small></p>
+        </div>
+        <div class="welcome-visual">
+          <img src="https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?auto=format&fit=crop&w=1000&q=85" alt="Fresh laundry in a bright laundry room">
+          <div class="visual-card"><span class="live-pulse"></span><div><b>Your laundry, under control</b><small>Book a machine in a few taps</small></div><span class="visual-check">✓</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Register screen -->
+    <section class="screen app-screen" id="register">
+      <div class="mobile-header"><button class="back-btn" onclick="goBack('welcome')" aria-label="Go back">←</button><span class="mini-brand"><img class="mini-brand-logo" src="smartwash-logo.png" alt="SmartWash logo"> SmartWash <b>Sign Up</b></span><button class="header-avatar" onclick="showInfo('Account','Create your SmartWash account')">S</button></div>
+      <div class="auth-card register-card">
+        <div class="card-heading"><span class="large-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="7.5" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="10" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="4.2"/><path d="M9.2 15.7c1.7-2.9 4.1-4.2 5.8-3.7"/></svg></span><div><span class="eyebrow">FAST ONBOARDING</span><h2>Create Your Account</h2><p>Join your building's smart laundry network & live telemetry.</p></div></div>
+        <button class="btn google-btn" onclick="googleFlow('register')"><span class="google-g">G</span> Continue with Google</button>
+        <div class="or"><span></span>OR REGISTER WITH EMAIL<span></span></div>
+        <form id="registerForm" novalidate>
+          <label>Full Name <em>Required</em><input id="fullName" type="text" placeholder="e.g. Sumathi Sankar" autocomplete="name" required></label>
+          <label>Email Address <em>Campus or Personal</em><input id="registerEmail" type="email" placeholder="you@example.com" autocomplete="email" required></label>
+          <label>Phone Number <em>SMS notifications</em><input id="phone" type="tel" placeholder="+91 98765 00000" autocomplete="tel" pattern="[+0-9 ()-]{8,18}"></label>
+          <label>Password <em>8+ characters</em><div class="password-wrap"><input id="registerPassword" type="password" placeholder="Min 8 characters" minlength="8" required><button type="button" class="eye" onclick="togglePassword('registerPassword',this)"><svg class="ui-icon eye-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div><div class="strength"><span id="strengthBar"></span></div><small class="hint">Password strength</small></label>
+          <label>Confirm Password<div class="password-wrap"><input id="confirmPassword" type="password" placeholder="Re-enter password" required><button type="button" class="eye" onclick="togglePassword('confirmPassword',this)"><svg class="ui-icon eye-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div></label>
+          <label class="check-row"><input id="terms" type="checkbox" required><span>I agree to the <a href="#" onclick="showInfo('Terms of Service','Use this demo responsibly. In a production system, the full terms and privacy policy would be linked here.');return false;">Terms of Service</a> & <a href="#" onclick="showInfo('Privacy Policy','Your details should be stored securely. This front-end demo stores account information only in this browser.');return false;">Privacy Policy</a></span></label>
+          <button class="btn primary full" type="submit">Create Account <span>→</span></button>
+          <p class="form-message" id="registerMessage" role="status"></p>
+        </form>
+        <div class="mini-banner"><span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span><div><b>Instant Lockers & Cycle Push Alerts</b><small>Connect once to access real-time machine telemetry.</small></div></div>
+        <p class="switch-line">Already registered? <button class="text-btn" onclick="showScreen('signin')">Sign In</button></p>
+      </div>
+    </section>
+
+    <!-- 3. Sign in screen -->
+    <section class="screen app-screen" id="signin">
+      <div class="mobile-header"><button class="back-btn" onclick="goBack('welcome')" aria-label="Go back">←</button><span class="mini-brand"><img class="mini-brand-logo" src="smartwash-logo.png" alt="SmartWash logo"> SmartWash <b>Sign In</b></span><button class="header-avatar" onclick="showInfo('Account','Sign in to your SmartWash account')">S</button></div>
+      <div class="auth-card signin-card">
+        <div class="signin-hero"><div class="machine-art"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="7.5" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="10" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="4.2"/><path d="M9.2 15.7c1.7-2.9 4.1-4.2 5.8-3.7"/></svg></div><span class="eyebrow">AQUACYCLE CONNECT</span><h2>Welcome Back</h2><p>Sign in to reserve washers, monitor telemetry, and manage cycles in real time.</p></div>
+        <button class="btn google-btn" onclick="googleFlow('signin')"><span class="google-g">G</span> Continue with Google</button>
+        <div class="or"><span></span>OR CONTINUE WITH EMAIL<span></span></div>
+        <form id="signinForm" novalidate>
+          <label>Email Address <em>Residential / Campus</em><input id="signinEmail" type="email" placeholder="alex@example.com" autocomplete="email" required></label>
+          <label>Password<div class="password-wrap"><input id="signinPassword" type="password" placeholder="Enter your password" required><button type="button" class="eye" onclick="togglePassword('signinPassword',this)"><svg class="ui-icon eye-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div></label>
+          <div class="remember-row"><label class="check-row"><input type="checkbox" id="rememberMe" checked><span>Remember me</span></label><button type="button" class="text-btn" onclick="showScreen('forgot')">Forgot Password?</button></div>
+          <button class="btn primary full" type="submit">Sign In <span>→</span></button>
+          <p class="form-message" id="signinMessage" role="status"></p>
+        </form>
+        <div class="security-strip"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="m9 12 2 2 4-4"/></svg> 256-Bit SSL Encrypted <span>•</span> <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg> Live Machine Sync</div>
+        <p class="switch-line">Don't have an account? <button class="text-btn" onclick="showScreen('register')">Sign Up</button></p>
+      </div>
+    </section>
+
+    <!-- 4. Google account chooser screen -->
+    <section class="screen" id="google">
+      <div class="google-modal">
+        <div class="google-modal-head"><button class="back-btn" onclick="showScreen(previousAuthScreen)">←</button><div class="google-brand"><span class="google-g">G</span> <b>Google Sign in</b></div><span class="avatar tiny">S</span></div>
+        <div class="google-content"><div class="google-logo">G</div><h2>Choose an account</h2><p>to continue to <b>SmartWash Laundry</b></p>
+          <button class="account-option" onclick="chooseGoogleAccount('Sumathi Sankar','sumathi.sankar@gmail.com')"><span class="avatar blue">S</span><span><b>Sumathi Sankar</b><small>sumathi.sankar@gmail.com</small></span><span class="last-used">LAST USED</span><span class="chevron">›</span></button>
+          <button class="account-option" onclick="chooseGoogleAccount('Sumathi Sankar','sumathi@university.edu')"><span class="avatar teal">S</span><span><b>Sumathi Sankar</b><small>sumathi@university.edu</small></span><span class="chevron">›</span></button>
+          <button class="account-option" onclick="addGoogleAccount()"><span class="avatar pale"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><span><b>Use another account</b></span><span class="chevron">›</span></button>
+          <div class="privacy-box">🔒 SmartWash will only access your basic profile (name, email address, and profile picture). No other Google services or data will be shared. <small>End-to-end encrypted token verification</small></div>
+          <button class="btn cancel-btn full" onclick="showScreen(previousAuthScreen)">Cancel</button>
+          <p class="google-terms"><a href="#" onclick="showInfo('Privacy Policy','This demo simulates Google sign-in. Real Google authentication requires OAuth configuration.');return false;">Privacy Policy</a> · <a href="#" onclick="showInfo('Terms of Service','Demo sign-in only. Configure Google OAuth before production use.');return false;">Terms of Service</a></p>
+        </div>
+      </div>
+      <div class="google-foot"><span>◉ Telemetry Sync Enabled</span><span>•</span><span>Washer Bays Ready</span></div>
+    </section>
+
+    <!-- 5. Home / dashboard screen -->
+    <section class="screen" id="home">
+      <div class="dashboard">
+        <div class="dash-top"><div class="dash-brand"><img class="dash-logo" src="smartwash-logo.png" alt="SmartWash logo"><div><b>SmartWash</b><small>HOME</small></div></div><div class="dash-user"><span class="notification" onclick="showInfo('Notifications','You are all caught up!')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg></span><button class="avatar user-avatar" onclick="showInfo('Profile',currentUser.name+'\\n'+currentUser.email)">S</button></div></div>
+        <div class="hello-row"><div><h2>Hello, <span id="helloName">SUMATHI</span> <span class="wave">👋</span></h2><p>◉ Oak Hall · 3rd Floor Laundry</p></div><div class="wallet"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18M16 14h2"/><path d="M6 5V3h12v2"/></svg> <b>$18.50</b><button onclick="showInfo('Laundry credits','Demo balance: $18.50')">+</button><small>CREDITS</small></div></div>
+        <article class="active-cycle">
+          <div class="cycle-label"><span>● ACTIVE CYCLE RUNNING</span><button onclick="showInfo('Machine status','Washer #04 is running. Estimated completion in 12 minutes.')">Bay 3A</button></div>
+          <div class="cycle-main"><div><h3>Washer #04 <span class="lock-tag">DOOR LOCKED</span></h3><p>◉ Eco Normal Cycle</p></div><div class="progress-ring"><span>68%</span></div></div>
+          <div class="cycle-stats"><div><b>◷ 12 mins</b><small>remaining</small></div><div><b>Warm 30°C</b><small>Temperature</small></div><div><b>1200 RPM</b><small>Spin Speed</small></div></div>
+          <button class="btn white-btn full" onclick="showInfo('Cycle details','Washer #04 · Eco Normal Cycle · 68% complete · 12 minutes remaining.')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg> View Details & Locker PIN <span>→</span></button>
+        </article>
+        <div class="quick-actions"><button onclick="showInfo('Reserve machine','Select an available washer or dryer below to book a demo slot.')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h3v3H8z"/></svg> Reserve Machine</button><button onclick="showInfo('Scan QR','Camera/QR scanning can be connected in the next development stage.')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z"/><path d="M14 14h3v3h-3zM20 14v2M17 20h4M20 18v3"/></svg> Scan QR on Washer</button></div>
+        <div class="section-title"><h3><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="7.5" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="10" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="4.2"/><path d="M9.2 15.7c1.7-2.9 4.1-4.2 5.8-3.7"/></svg> Laundry Bay Status</h3><span>2 AVAILABLE</span></div>
+        <div class="machine-grid">
+          <article class="machine-card"><div class="machine-head"><span class="washer-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="7.5" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="10" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="4.2"/><path d="M9.2 15.7c1.7-2.9 4.1-4.2 5.8-3.7"/></svg></span><span class="status available">● Available</span></div><h4>Washer 01</h4><p>$3.00 / cycle</p><button class="btn small primary" onclick="reserveMachine('Washer 01')">↗ Quick Book</button></article>
+          <article class="machine-card"><div class="machine-head"><span class="washer-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="7.5" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="10" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="4.2"/><path d="M9.2 15.7c1.7-2.9 4.1-4.2 5.8-3.7"/></svg></span><span class="status busy">● In Use</span></div><h4>Washer 02</h4><p>8 mins left</p><button class="btn small light" onclick="notifyMachine('Washer 02')">♧ Notify Me</button></article>
+          <article class="machine-card"><div class="machine-head"><span class="washer-icon dryer"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="12" cy="14" r="4.3"/><path d="M10 12c1 1 1 3 2 4s2 1 3 0"/></svg></span><span class="status available">● Available</span></div><h4>Dryer 01</h4><p>$2.50 / 45m</p><button class="btn small primary" onclick="reserveMachine('Dryer 01')">↗ Quick Book</button></article>
+          <article class="machine-card"><div class="machine-head"><span class="washer-icon dryer"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="12" cy="14" r="4.3"/><path d="M10 12c1 1 1 3 2 4s2 1 3 0"/></svg></span><span class="status busy">● In Use</span></div><h4>Dryer 02</h4><p>24 mins left</p><button class="btn small light" onclick="notifyMachine('Dryer 02')">♧ Notify Me</button></article>
+        </div>
+        <button class="preferences" onclick="showInfo('Preferences & Alerts','Alert sound: Gentle Chime\\nAuto Reload: At $5.00\\nLocker PIN: Auto-reset')"><span class="pref-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.7 1l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.7-1l-1.7.6-1.4-2.4 1.4-1.1a7 7 0 0 1 0-2L6.5 12l1.4-2.4 1.7.6a8 8 0 0 1 1.7-1l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.7 1l1.7-.6 1.4 2.4-1.4 1.1a7 7 0 0 1-.7 1.9z"/></svg></span><span><b>Preferences & Alerts</b><small>Lock sound, payment, vibration</small></span><span>›</span></button>
+        <div class="pref-options"><div><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg><b>Alert Sound</b><small>Gentle Chime</small></div><div><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 8h18M16 14h2"/><path d="M6 5V3h12v2"/></svg><b>Auto Reload</b><small>At $5.00</small></div><div><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg><b>Lock PIN</b><small>Auto-reset</small></div></div>
+        <nav class="bottom-nav"><button class="selected" onclick="showInfo('Home','You are viewing Home.')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg><small>Home</small></button><button onclick="showInfo('Machines','Machine list is shown on the Home dashboard.')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="2.5"/><path d="M4 7h16"/><circle cx="7.5" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="10" cy="5" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="14" r="4.2"/><path d="M9.2 15.7c1.7-2.9 4.1-4.2 5.8-3.7"/></svg><small>Machines</small></button><button onclick="showInfo('Activity','Your recent laundry activity will appear here.')"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><small>Activity</small></button><button onclick="showInfo('Profile',currentUser.name+' · '+currentUser.email)"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><small>Profile</small></button></nav>
+      </div>
+    </section>
+
+    <!-- 6. Forgot password screen -->
+    <section class="screen app-screen" id="forgot">
+      <div class="mobile-header"><button class="back-btn" onclick="goBack('signin')" aria-label="Go back">←</button><span class="mini-brand"><img class="mini-brand-logo" src="smartwash-logo.png" alt="SmartWash logo"> SmartWash <b>Forgot Password</b></span><button class="header-avatar" onclick="showInfo('Account','Password recovery')">S</button></div>
+      <div class="auth-card forgot-card">
+        <div class="forgot-heading"><div class="reset-icon"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="15" r="5"/><path d="m12 12 9-9M17 7l3 3M14 10l3 3"/></svg><small>↻</small></div><h2>Reset Your Password</h2><p>Enter your registered email address and we'll send you a 6-digit verification code to reset your password.</p></div>
+        <form id="forgotForm" novalidate>
+          <div class="email-panel"><label>Email Address <em>Linked to your account</em><input id="forgotEmail" type="email" placeholder="your.email@example.com" required></label><button class="btn primary full" type="submit">➤ Send Verification Code</button><p class="form-message" id="forgotMessage" role="status"></p><div class="resend-note">◷ Didn't receive email? Check spam or resend in <b id="resendTimer">43s</b><small>Tap here to resend code</small></div></div>
+          <button class="sms-option" type="button" onclick="showInfo('SMS verification','SMS verification is a UI prototype. Connect an SMS provider to send real codes.')"><span><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span><span><b>Try phone SMS verification</b><small>Instant code sent to •••• 8492</small></span><span>›</span></button>
+        </form>
+        <button class="text-btn return-link" onclick="showScreen('signin')">← Return to Sign In</button>
+        <div class="help-box"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg> <span><b>Need assistance with automated machine access?</b><small>Contact Campus Laundry Support for assistance 24/7.</small></span></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status"></div>
+  <dialog id="infoDialog"><div class="dialog-content"><button class="dialog-close" onclick="document.getElementById('infoDialog').close()">×</button><h3 id="dialogTitle">Information</h3><p id="dialogText"></p><button class="btn primary full" onclick="document.getElementById('infoDialog').close()">Okay</button></div></dialog>
+  <script src="script.js"></script>
+</body>
+</html>
